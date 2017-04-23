@@ -44,10 +44,12 @@ export class Intrinio {
     get(path: string, options?: IntrinioRequestOptions) {
         let url = BASE_URL + '/' + path + '?';
         for (let prop in options) {
-            url += `prop=${options[prop]}&`;
+            url += `${prop}=${options[prop]}&`;
         }
 
         return new Promise<any>((resolve, reject) => {
+
+            console.log('Making a get request to ' + url);
 
             get(url, {
                 auth: {
