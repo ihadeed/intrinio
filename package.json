@@ -1,0 +1,23 @@
+{
+  "name": "node-intrinio",
+  "version": "1.0.0",
+  "description": "NodeJS Client for Intrinio",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ihadeed/node-intrinio.git"
+  },
+  "keywords": [
+    "intrinion",
+    "stocks"
+  ],
+  "author": "Ibby Hadeed <ibby@zyra.ca>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ihadeed/node-intrinio/issues"
+  },
+  "homepage": "https://github.com/ihadeed/node-intrinio#readme"
+}
