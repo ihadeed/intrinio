@@ -20,14 +20,43 @@ export class Intrinio {
         private password: string
     ){}
 
-    watchPrices(ticker: string, interval: number = 10000): Observable<any> {
+    watchPrices(ticker: string, options?: IntrinioRequestOptions, interval: number = 10000): Observable<any> {
+            options = options || {};
+            options.ticker = ticker;
+
         return new Observable<any>((observer) => {
-            const getData = () => this.get('prices', { ticker }).then(observer.next.bind(observer), observer.error.bind(observer));
+            const getData = () => this.get('prices', options).then(observer.next.bind(observer), observer.error.bind(observer));
             getData();
             const watch = setInterval(getData.bind(this), interval);
             return () => clearInterval(watch);
         });
     }
+
+    watchSecurityPrices(id: string, options?: IntrinioRequestOptions, interval: number = 10000): Observable<any> {
+            options = options || {};
+            options.id = id;
+
+            return new Observable<any>((observer) => {
+                const getData = () => this.get('securities', options).then(observer.next.bind(observer), observer.error.bind(observer));
+                getData();
+                const watch = setInterval(getData.bind(this), interval);
+                return () => clearInterval(watch);
+            })
+    }
+
+
+    getSecurityById(id: string, options?: IntrinioRequestOptions): Promise<any> {
+        options = options || {};
+        options.id = id;
+        return this.get('securities', options);
+    }
+
+    querySecurities(query: string, options?: IntrinioRequestOptions): Promise<any> {
+        options = options || {};
+        options.query = query;
+        return this.get('securities', options);
+    }
+
 
     getCompanyByTicker(ticker: string, options?: IntrinioRequestOptions): Promise<any> {
         options = options || {};
