@@ -1,7 +1,7 @@
 import { get } from 'request';
 import { Observable } from 'rxjs/Observable';
 
-const BASE_URL: string = 'https://intrinio.com/api';
+const BASE_URL: string = 'https://api.intrinio.com/';
 
 export interface IntrinioRequestOptions {
     page_size?: number;
@@ -41,26 +41,29 @@ export class Intrinio {
         return this.get('companies', options);
     }
 
-    get(path: string, options?: IntrinioRequestOptions) {
-        let url = BASE_URL + '/' + path + '?';
+    get(path: string, options?: IntrinioRequestOptions): Promise<any> {
+        let url = BASE_URL + path + '?';
         for (let prop in options) {
             url += `${prop}=${options[prop]}&`;
         }
 
         return new Promise<any>((resolve, reject) => {
 
-            console.log('Making a get request to ' + url);
-
             get(url, {
                 auth: {
                     user: this.username,
-                    pass: this.password,
-                    sendImmediately: true
+                    pass: this.password
                 }
             }, (err, res, body) => {
                 if (err) {
+                    try {
+                        err = JSON.parse(err);
+                    } catch (e) {}
                     reject(err);
                 } else {
+                    try {
+                        body = JSON.parse(body);
+                    } catch (e) {}
                     resolve(body);
                 }
             });
