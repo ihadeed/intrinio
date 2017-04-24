@@ -8,6 +8,7 @@ export interface IntrinioRequestOptions {
     page?: number;
     ticker?: string;
     query?: string;
+    id?: string;
 
     // TODO remove this once you implement all available options
     [key: string]: any;
@@ -31,19 +32,6 @@ export class Intrinio {
             return () => clearInterval(watch);
         });
     }
-
-    watchSecurityPrices(id: string, options?: IntrinioRequestOptions, interval: number = 10000): Observable<any> {
-            options = options || {};
-            options.id = id;
-
-            return new Observable<any>((observer) => {
-                const getData = () => this.get('securities', options).then(observer.next.bind(observer), observer.error.bind(observer));
-                getData();
-                const watch = setInterval(getData.bind(this), interval);
-                return () => clearInterval(watch);
-            })
-    }
-
 
     getSecurityById(id: string, options?: IntrinioRequestOptions): Promise<any> {
         options = options || {};
