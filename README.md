@@ -2,7 +2,7 @@
 Unofficial NodeJS SDK for Intrinio
 
 ## Installation
-```
+```shell
 npm i --save intrinio
 ```
 
@@ -10,14 +10,14 @@ npm i --save intrinio
 
 
 ### Vanilla Javascript
-```
+```js
 var Intrinio = require('intrinio');
 
 var intrinio = new Intrinio(username, password);
 ```
 
 ### ES6 / Typescript
-```
+```ts
 import Intrinio from 'intrinio';
 
 const intrinio = new Intrinio(username, password);
@@ -28,7 +28,7 @@ const intrinio = new Intrinio(username, password);
 
 
 ### queryCompanies
-```
+```ts
 // signature
 queryCompanies(query, options?)
 
@@ -42,7 +42,7 @@ Query companies
 - **options**: optional options (object)
 
 ### getCompanyByTicker
-```
+```ts
 // signature
 getCompanyByTicker(ticker: string, options?)
 
@@ -56,7 +56,7 @@ Get company profile by ticker
 - **options**: optional options (object)
 
 ### watchPrices
-```
+```ts
 // signature
 watchPrices(ticker, options?, interval?)
 
@@ -72,11 +72,11 @@ Watch price for a ticker.
 - **interval**: number of milliseconds between each check (number), defaults to `10000`
 
 ### getSecurityById
-```
+```ts
 getSecurityById(id, options?)
 ```
 
 ### querySecurities
-```
+```ts
 querySecurities(query, options?)
 ```
